@@ -15,32 +15,31 @@ bool compare(ll a,ll b)
     return a<b;
 }
 
- int solve(string s) {
+bool solve(string s)
+{
+    int f=0;
+    int l=s.length();
+    l--;
+    int cnt=0;
+
+    while(f<=l)
+    {
+        cout<<cnt<<" "<<f<<" "<<l<<endl;
+        if(s[f]!=s[l])
+        cnt++,f++;
+
+
+        else 
+        f++,l--;
+
         
 
-        // remove the last space of the string 
-        if(s.length()==0)
-            return 0;
-        
-        bool flag=false,check=false;
-        
-        int n=s.length()-1;
-        int cnt=0;
-        for(int i=n;i>=0;i--){
-            if(s[i]!=' '){
-                for(int j=i;j>=0;j--){
-                    if(s[j]==' '){
-                        flag=true;
-                        break;
-                    }
-                    cnt++;
-                }
-                break;
-            }
-        }
-        return cnt;
-        
+        if(cnt>1)
+        return 0;
     }
+
+    return 1;
+}
 
 int main ()
 {
@@ -55,7 +54,6 @@ int main ()
         ll i,j;
         string s;
         cin>>s;
-
         cout<<solve(s);
 
     }

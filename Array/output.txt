@@ -1,1 +1,3 @@
-5
+    the       sky       is       blue     
+the       sky       is       blue
+blue is sky the
