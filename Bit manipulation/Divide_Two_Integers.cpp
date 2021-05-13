@@ -16,44 +16,55 @@ bool compare(ll a,ll b)
 }
 
 
-int solve(int dividend,int divisor)
+int solve(int x,int y)
 {
    /* first method */
 
 //    keep substracting the divisor from the dividend until the divident becomes less then divisor and return total count 
 
 // cout<<dividend<<divisor<<endl;
-    bool flag=false;
-
-    if((dividend<0 and divisor>0) or (dividend>0 or dividend<0))
-    flag=true;
-
-    divisor=abs(divisor);
-    dividend=abs(dividend);
-
-
-    long long int q=0,i;
-    long long int t=0;
-
-    for(i=31;i>=0;i--)
-    {
-        unsigned long int num=t+(divisor<<i);
+     bool flag=false;
         
-        // cout<<num<<endl;
-        if(num<=dividend)
+    if((x>=0 and y>=0) or (x<=0 and y<=0))
+        flag=false;
+        
+    else 
+        flag=true;
+
+    long long int divisor=abs(y);
+    long long int dividend=abs(x);
+
+
+    long long int quotient=0;
+    long long int temp=0;
+
+    for(int i=31;i>=0;--i)
+    {
+        if(temp+(divisor << i)<=dividend)
         {
-            t+=(divisor<<i);
-            cout<<t<<endl;
-            q+=(1<<i);
-            // cout<<q<<endl;
+            temp+=divisor<<i;
+            // cout<<t<<" "<<i<<endl;
+            quotient|=1LL<<i;
+            
         }
         // cout<<(divisor<<i)<<" "<<t<<" "<<i<<endl;
     }
+        
+     if(flag==true){
+        cout<<"YES"<<endl;
+        return -1*quotient;
+    }
 
-    cout<<q<<endl;
+    if(quotient>=INT_MAX)
+        quotient=INT_MAX;
+        
+    if(quotient<INT_MIN)
+        quotient=INT_MIN;
 
-    return 0;
-}
+    
+
+    return quotient;
+        
 
 int main ()
 {
