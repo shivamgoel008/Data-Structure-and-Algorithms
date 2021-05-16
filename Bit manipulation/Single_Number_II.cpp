@@ -17,20 +17,35 @@ bool compare(ll a,ll b)
 
 int solve(vector<int>v)
 {
+
+    for(auto i:v)
+    {
+        bitset<32>bit(i);
+        cout<<bit<<endl;
+    }
     int ans=0;
     for(int i=0;i<32;i++)
     {
         int sum=0;
         for(int j=0;j<v.size();j++)
         {
+            cout<<(v[j]>>i)<<" ";
             if((v[j]>>i)&1==1)
             sum++;
         }
 
+        cout<<endl;
+
+        cout<<sum<<endl;
+
         sum=sum%3;
+
 
         if(sum!=0)
         ans|=sum<<i;
+        cout<<ans<<endl;
+
+        
     }
 
     return ans;

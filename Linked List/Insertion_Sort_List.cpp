@@ -52,7 +52,7 @@ void insertion_at_end(node*&head,int data)
 
 node* solve(node*head)
 {
-    node*start=new node(-1);
+    node*start=new node(0);
     start->next=head;
 
     node*curr=head;
@@ -63,9 +63,9 @@ node* solve(node*head)
         if(curr->next!=NULL and curr->next->data<curr->data)
         {
             
-            curr->next=curr->next->next;
+            // curr->next=curr->next->next;
 
-            while(prev->next!=NULL and (curr->next->data<curr->next->data))
+            while(prev->next!=NULL and (prev->next->data<curr->next->data))
             {
                 prev=prev->next;
             }
@@ -78,12 +78,15 @@ node* solve(node*head)
         }
 
         else 
-        {}// dont need to do anything 
+        {
+            curr=curr->next; 
+        }// dont need to do anything 
 
-        curr=curr->next; 
+        
+        // prev=prev->next;
     }
 
-    return head;
+    return start->next;
 }
 
 void print(node*head)
@@ -107,22 +110,22 @@ int main ()
     // test()
     {
         node*head=NULL;
-        node*temp=NULL;
+        // node*temp=NULL;
+        insertion_at_end(head,4);
+        insertion_at_end(head,2);
         insertion_at_end(head,1);
-        insertion_at_end(head,2);
-        insertion_at_end(head,2);
-        insertion_at_end(head,1);
-        insertion_at_end(head,2);
-        insertion_at_end(head,0);
-        insertion_at_end(head,2);
-        insertion_at_end(head,2);
+        insertion_at_end(head,3);
+        // insertion_at_end(head,0);
+     
 
         print(head);
 
         cout<<endl;
 
 
-        print(solve(head));
+        node*temp=solve(head);
+
+        print(temp);
         
     }
     return 0;
