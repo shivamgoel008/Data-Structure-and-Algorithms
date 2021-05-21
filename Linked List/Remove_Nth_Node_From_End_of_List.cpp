@@ -59,34 +59,36 @@ void print(node*head)
 }
 
 
-node*solve(node*head)
+node*solve(node*head,int n)
 {
-    node*ans=new node(-200);
-        ans->next=head;
-        node*ptr=ans;
+     if(head==NULL)
+            return NULL;
         
-        while(ans->next!=NULL){
-            if(ans->next!=NULL){
-                if(ans->data==ans->next->data){
-                    node*temp=ans;
-                    while(temp!=NULL){
-                        if(temp->data!=ans->data)
-                            break;
-                        temp=temp->next;
-                    }
-                    
-                    ans->next=temp;
-                }
-                else 
-                    ans=ans->next;
-            }
-            
-            else 
-                ans=ans->next;
+        
+        node*temp=head;
+        int cnt=0;
+        while(temp!=NULL){
+            cnt++;
+            temp=temp->next;
+        }
+        int k=0;
+        
+        if(cnt==1)
+            return NULL;
+        
+        if(cnt==n)
+            return head->next;
+        temp=head;
+        while(k<cnt-n-1){
+            k++;
+            temp=temp->next;
         }
         
-        return ptr->next;
+        temp->next=temp->next->next;
+        
+        return head;
 }
+
 
 int main ()
 {
@@ -95,17 +97,19 @@ int main ()
     freopen("output.txt","w",stdout);
 #endif
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-
+    cin.tie(NULL);  
     node*head=NULL;
+
     insertion_at_end(head,1);
     insertion_at_end(head,1);
     insertion_at_end(head,3);
 
     print(head);
 
-   
+    int n;
+    cin>>n;
 
-    print(solve(head));
+    print(solve(head,n));
+
     return 0;
 }
