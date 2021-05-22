@@ -58,35 +58,37 @@ void print(node*head)
     }
 }
 
-
+// method of swapping the nodes 
 node*solve(node*head)
 {
-    node*ans=new node(-200);
-        ans->next=head;
-        node*ptr=ans;
-        
-        while(ans->next!=NULL){
-            if(ans->next!=NULL){
-                if(ans->data==ans->next->data){
-                    node*temp=ans;
-                    while(temp!=NULL){
-                        if(temp->data!=ans->data)
-                            break;
-                        temp=temp->next;
-                    }
-                    
-                    ans->next=temp;
-                }
-                else 
-                    ans=ans->next;
-            }
-            
-            else 
-                ans=ans->next;
+    if(head==NULL)
+    return head;
+
+    if(head->next==NULL)
+    return head;
+
+    node*first=head;
+    node*ans=first->next;
+
+    while(1)
+    {
+        node*second=first->next;
+        node*temp=second->next;
+        second->next=first;
+
+        if(temp==NULL or temp->next==NULL)
+        {
+            first->next=temp;
+            break;
         }
-        
-        return ptr->next;
+
+        first->next=temp->next;
+        first=temp;
+    }
+
+    return ans;
 }
+
 
 int main ()
 {
@@ -95,14 +97,19 @@ int main ()
     freopen("output.txt","w",stdout);
 #endif
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    cin.tie(NULL); 
+
 
     node*head=NULL;
     insertion_at_end(head,1);
-    insertion_at_end(head,1);
-    insertion_at_end(head,3);
+    insertion_at_end(head,2);
+    // insertion_at_end(head,3);
+    // insertion_at_end(head,4);
 
-    print(head);   
+    print(head);
+    cout<<endl;
+
     print(solve(head));
+    
     return 0;
 }

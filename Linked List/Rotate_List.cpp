@@ -59,34 +59,53 @@ void print(node*head)
 }
 
 
-node*solve(node*head)
+node*solve(node*head,int k)
 {
-    node*ans=new node(-200);
-        ans->next=head;
-        node*ptr=ans;
+    int cnt=0;
         
-        while(ans->next!=NULL){
-            if(ans->next!=NULL){
-                if(ans->data==ans->next->data){
-                    node*temp=ans;
-                    while(temp!=NULL){
-                        if(temp->data!=ans->data)
-                            break;
-                        temp=temp->next;
-                    }
-                    
-                    ans->next=temp;
-                }
-                else 
-                    ans=ans->next;
-            }
+        if(k==0)
+            return head;
+        
+        if(head==NULL)
+            return NULL;
+        
+        if(head->next==NULL)
+            return head;
+        
+        node*temp=head;
+        while(temp->next){
+            cnt++;
+            temp=temp->next;
+        }
+        cnt++;
+        
+        
+        // important condition and must revise 
+        if(k>=cnt){
             
-            else 
-                ans=ans->next;
+            k=k%cnt;
         }
         
-        return ptr->next;
+        if(k==0)
+            return head;
+        node*gandu=head;
+        int n=0;
+        while(n<cnt-k-1){
+            n++;
+            gandu=gandu->next;
+        }
+        
+        cout<<temp->data<<endl;
+        cout<<gandu->data<<endl;
+        
+        
+        node*ans= gandu->next;
+        gandu->next=NULL;
+        temp->next=head;
+        
+        return ans;
 }
+
 
 int main ()
 {
@@ -95,14 +114,21 @@ int main ()
     freopen("output.txt","w",stdout);
 #endif
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-
+    cin.tie(NULL);  
     node*head=NULL;
     insertion_at_end(head,1);
-    insertion_at_end(head,1);
-    insertion_at_end(head,3);
+    insertion_at_end(head,2);
+    // insertion_at_end(head,3);
+    // insertion_at_end(head,4);
 
-    print(head);   
-    print(solve(head));
+
+    int n;
+    cin>>n;
+
+    print(head);
+    cout<<endl;
+
+    print(solve(head,n));
+    
     return 0;
 }

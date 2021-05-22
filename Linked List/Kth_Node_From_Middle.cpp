@@ -15,6 +15,7 @@ bool compare(ll a,ll b)
     return a<b;
 }
 
+
 class node
 {
 public:
@@ -59,34 +60,36 @@ void print(node*head)
 }
 
 
-node*solve(node*head)
+int solve(node*head,int k)
 {
-    node*ans=new node(-200);
-        ans->next=head;
-        node*ptr=ans;
-        
-        while(ans->next!=NULL){
-            if(ans->next!=NULL){
-                if(ans->data==ans->next->data){
-                    node*temp=ans;
-                    while(temp!=NULL){
-                        if(temp->data!=ans->data)
-                            break;
-                        temp=temp->next;
-                    }
-                    
-                    ans->next=temp;
-                }
-                else 
-                    ans=ans->next;
-            }
-            
-            else 
-                ans=ans->next;
-        }
-        
-        return ptr->next;
+    int cnt=0;
+    node*temp=head;
+
+    while(temp)
+    {
+        cnt++;
+        temp=temp->next;
+    }
+    int mid=cnt/2+1,n=0;
+
+    if(mid-k<=0)
+    return -1;
+
+    if(mid-k==0)
+    return head->data;
+
+    while(n<mid-k-1)
+    {
+        n++;
+        head=head->next;
+
+    }
+
+    // cout<<head->data<<endl;
+
+    return head->data;
 }
+
 
 int main ()
 {
@@ -95,14 +98,25 @@ int main ()
     freopen("output.txt","w",stdout);
 #endif
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-
+    cin.tie(NULL);  
     node*head=NULL;
-    insertion_at_end(head,1);
-    insertion_at_end(head,1);
     insertion_at_end(head,3);
+    insertion_at_end(head,4);
+    insertion_at_end(head,7);
+    insertion_at_end(head,5);
+    insertion_at_end(head,6);
+    insertion_at_end(head,16);
+    insertion_at_end(head,15);
+    insertion_at_end(head,61);
+    insertion_at_end(head,16);
 
-    print(head);   
-    print(solve(head));
+
+    int n;
+    cin>>n;
+
+    print(head);
+    cout<<endl;
+
+    cout<<(solve(head,n));
     return 0;
 }
