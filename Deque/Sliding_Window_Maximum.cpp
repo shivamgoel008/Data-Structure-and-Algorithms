@@ -10,10 +10,16 @@ using namespace std;
 #define MOD 1000000007
 #define test() ll t; cin>>t; while(t--)
 
-
-void foo()
+bool compare(ll a,ll b)
 {
-    cout<<"SHIVAM"<<endl;
+    return a<b;
+}
+
+
+vector<int>solve(vector<int>v)
+{
+    deque<int>dq;
+    dq.
 }
 
 int main ()
@@ -24,11 +30,17 @@ int main ()
 #endif
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);  
+    // test()
+    {
+        ll i,j,n;
+        cin>>n;
 
-    cout<<"AVINASH"<<endl;
+        vector<int>v(n);
 
-    foo();
+        for(i=0;i<n;i++)
+        cin>>v[i];
 
-    
+        vector<int>ans=solve(v);
+    }
     return 0;
 }

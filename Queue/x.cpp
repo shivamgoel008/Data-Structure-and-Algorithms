@@ -10,10 +10,9 @@ using namespace std;
 #define MOD 1000000007
 #define test() ll t; cin>>t; while(t--)
 
-
-void foo()
+bool compare(ll a,ll b)
 {
-    cout<<"SHIVAM"<<endl;
+    return a<b;
 }
 
 int main ()
@@ -24,11 +23,9 @@ int main ()
 #endif
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);  
-
-    cout<<"AVINASH"<<endl;
-
-    foo();
-
-    
+    test()
+    {
+        ll i,j,n;
+    }
     return 0;
 }

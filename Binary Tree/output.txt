@@ -1,0 +1,30 @@
+Preorder Print: 8 10 1 6 9 7 3 14 13 
+Inorder Print: 1 10 9 6 7 8 3 13 14 
+Postorder Print: 1 10 9 6 7 8 3 13 14 
+Height Of tree: 4
+Printing Kth Level: 10 3 
+Printing all the levels of tree OR (Level Order Print): 
+8 
+10 3 
+1 6 14 
+9 7 13 
+BFS Print of Tree: 
+8 
+10 3 
+1 6 14 
+9 7 13 
+
+Number of nodes In Tree: 9
+Sum of nodes In Tree: 71
+Diameter Of tree: 6
+NOT BALANCED
+Blanced Tree: 
+4 
+2 6 
+1 3 5 7 
+8 
+Building Tree from inorder and preorder: 
+1 
+2 5 
+3 4 6 
+8 7 

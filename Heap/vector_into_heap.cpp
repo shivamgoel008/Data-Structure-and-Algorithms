@@ -10,10 +10,25 @@ using namespace std;
 #define MOD 1000000007
 #define test() ll t; cin>>t; while(t--)
 
-
-void foo()
+bool compare(ll a,ll b)
 {
-    cout<<"SHIVAM"<<endl;
+    return a<b;
+}
+
+// coverting vector in heap inplace(without taking extra sapce)
+void buildHeap(vector<int> &v)
+{
+    for(int i=2;i<v.size();i++)
+    {
+        int index=i;
+        int parent=i/2;
+        while(index>1 and v[index]>v[parent])
+        {
+            swap(v[index],v[parent]);
+            index=parent;
+            parent=parent/2;
+        }
+    }
 }
 
 int main ()
@@ -24,11 +39,13 @@ int main ()
 #endif
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);  
-
-    cout<<"AVINASH"<<endl;
-
-    foo();
-
     
+    vector<int>v={-1,10,20,5,6,1,8,9,4};
+    buildHeap(v);
+    for(auto i:v)
+    cout<<i<<" ";
+    cout<<endl;
+
+
     return 0;
 }
