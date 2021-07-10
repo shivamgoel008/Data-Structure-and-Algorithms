@@ -1,5 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
+#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
 #define pb push_back
 #define mp make_pair
 #define ll long long
@@ -9,12 +12,12 @@ using namespace std;
 #define set(a) memset(a,0,sizeof(a))
 #define MOD 1000000007
 #define test() ll t; cin>>t; while(t--)
+#define ordered_set tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>
 
 bool compare(ll a,ll b)
 {
     return a<b;
 }
-
 int main ()
 {
 #ifndef ONLINE_JUDGE
@@ -22,28 +25,29 @@ int main ()
     freopen("output.txt","w",stdout);
 #endif
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    cin.tie(NULL);  
     // test()
     {
-        ll n;
-        cin>>n;
+        ll i,j,n;
+        // ll i,j,n;
+        ordered_set st;
+        st.insert(5);
+        st.insert(10);
+        st.insert(1);
+        st.insert(3);
+        st.insert(6);
 
-        multiset<ll>ms;
-
-        for(ll i=0;i<n;i++)
-        ms.insert((i+1)*10);
-
-        for(auto i:ms)
+        for(auto i:st)
         cout<<i<<" ";
         cout<<endl;
 
-        cout<<*upper_bound(ms.begin(),ms.end(),10);
-        ms.erase(*upper_bound(ms.begin(),ms.end(),10));
-        cout<<endl;
+        cout<<(*st.find_by_order(3))<<endl;
 
-        for(auto i:ms)
-        cout<<i<<" ";
-        cout<<endl;
+        cout<<st.order_of_key(6)<<endl;
+
+        multiset <ll> s;
+        
+
     }
     return 0;
 }

@@ -1,1 +1,19 @@
-85
+Vertex 0 1 4 
+Vertex 1 0 2 
+Vertex 2 1 3 
+Vertex 3 5 2 4 
+Vertex 4 5 0 3 
+Vertex 5 3 6 4 
+Vertex 6 5 
+
+1 0 2 4 3 5 6 
+SHortest Path to 0 is 1
+SHortest Path to 1 is 0
+SHortest Path to 2 is 1
+SHortest Path to 3 is 2
+SHortest Path to 4 is 2
+SHortest Path to 5 is 3
+SHortest Path to 6 is 4
+
+6--5--4--0--1
+1 0 4 5 3 2 6 vertex: A (B, 20) (C, 10) (D, 50) vertex: B (A, 20) (D, 40) vertex: C (A, 10) (D, 40) vertex: D (B, 40) (C, 40) 
