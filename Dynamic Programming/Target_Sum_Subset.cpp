@@ -1,89 +1,95 @@
 #include <bits/stdc++.h>
+#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>
 using namespace std;
-#define pb push_back
-#define mp make_pair
-#define ll long long
-#define setbits(x) __builtin_popcountll(x)
-#define zerobits(x) __builtin_ctzll(x)
-#define fo(i,n) for(i=0;i<n;i++)
-#define set(a) memset(a,0,sizeof(a))
-#define MOD 1000000007
-#define test() ll t; cin>>t; while(t--)
+using namespace __gnu_pbds;
+#define ll            long long int
+#define endl          "\n"
+#define MOD           1e9 + 7
+#define test()        ll t; cin>>t; while(t--)
+#define ordered_set   tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>
+
+
+/* Think More, Code Less */
+/* Soch bo*dk Soch */
 
 bool compare(ll a,ll b)
 {
     return a<b;
 }
-bool subSetSum(vector<int>v,int sum)
+
+
+bool solve(ll n,vector<ll>v,ll target)
 {
-    // for(int i=0;i<v.size();i++)
-    // cout<<v[i]<<" ";
-    // cout<<endl;
-    bool dp[v.size()+1][sum+1]={false};
+    bool dp[n+1][target+1];
+    ll i,j;
 
-    
+    // cout<<target<<endl;
 
-    for(int i=0;i<v.size()+1;i++)
+    for(i=0;i<n+1;i++)
     {
-        for(int j=0;j<sum+1;j++)
+        for(j=0;j<target+1;j++)
         {
-            // cout<<"YES"<<endl;
-            if(i==0 and j==0)
+            if(j==0)
             dp[i][j]=true;
 
-            else if(j==0)
-            dp[i][j]=true;
-
-            else if(i==0)
+            else 
             dp[i][j]=false;
+        }
+    }
 
-            else
+    for(i=1;i<n+1;i++)
+    {
+        for(j=1;j<target+1;j++)
+        {
+            ll first=false;
+            ll second=false;
+
+            if(i-1>=0)
             {
                 if(dp[i-1][j]==true)
-                dp[i][j]=true;
-
-                else 
-                {
-                    int val =v[i-1];
-                    if(j-val>=0)
-                    {
-                        if(dp[i-1][j-val]==true)
-                        dp[i][j]=true;
-
-                        else 
-                        dp[i][j]=false;
-                    }
-
-                    else 
-                    dp[i][j]=false;
-                }
-
+                first=true;
             }
 
+            // cout<<target-j<<" "<<i-1<<endl;
+            int val=v[i-1];
+            if(j-val>=0)
+            {
+                if(dp[i-1][j-val]==true)
+                second=true;
+            }
+
+            
+
+
+            if(first==true or second==true)
+            dp[i][j]=true;
+
+            else 
+            dp[i][j]=false;
+            
+        }
+    }
+
+
+
+    for(i=0;i<n+1;i++)
+    {
+        for(j=0;j<target+1;j++)
+        {
             cout<<dp[i][j]<<" ";
         }
 
         cout<<endl;
-        
     }
 
+    cout<<endl;
 
-    // for(int i=0;i<v.size()+1;i++)
-    // {
-    //     for(int j=0;j<sum+1;j++)
-    //     cout<<dp[i][j]<<" ";
-    //     cout<<endl;
-    // }
-
-    // int ans=INT_MAX;
-
-    // for(int i=0;i<=(sum+1)/2;i++)
-    // {
-    //     if(dp[v.size()][i]==true)
-    //     ans=min(ans,abs(sum-2*i));
-    // }
-
-    return dp[v.size()][sum];
+    // cout<<dp[n+1][target+1]<<" "<<n+1<<" "<<target+1<<endl;
+     if(dp[n][target]==1)
+    return true;
+    
+    return false;
 }
 
 int main ()
@@ -99,25 +105,21 @@ int main ()
         ll i,j,n;
         cin>>n;
 
-        vector<int>v(n);
+        vector<ll>v(n);
 
         for(i=0;i<n;i++)
         cin>>v[i];
 
-
-        int target;
+        ll target ;
         cin>>target;
 
-        // for(i=0;i<n;i++)
-        // cout<<v[i]<<" ";
-        // cout<<endl;
+        cout<<solve(n,v,target);
 
-        if(subSetSum(v,accumulate(v.begin(),v.end(),0)))
-        cout<<"true";
-        
-        else 
-        cout<<"false";
+        // if(solve(n,v,target))
+        // cout<<"true";
 
+        // else 
+        // cout<<"false";
     }
     return 0;
 }
