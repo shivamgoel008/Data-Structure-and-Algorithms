@@ -18,40 +18,35 @@ bool compare(ll a,ll b)
     return a<b;
 }
 
-ll solve(vector<ll>v,ll n,ll amount)
+ll solve(vector<ll>v,ll n)
 {
+    ll dp[2][n];
     ll i,j;
-    ll dp[amount+1];
 
-    for(i=0;i<amount+1;i++)
-    {
-        if(i==0)
-        {
-            dp[i]=1;
-            continue;
-        }
-
-        dp[i]=0;
-    }
-
-    for(i=1;i<amount+1;i++)
+    for(i=0;i<2;i++)
     {
         for(j=0;j<n;j++)
-        {
-            if(i-v[j]>=0)
-            {
-                // cout<<i-v[j]<<" ";
-                dp[i]+=dp[i-v[j]];
-            }
-        }
+        dp[i][j]=0;
     }
 
-    // for(i=0;i<amount+1;i++)
-    // cout<<dp[i]<<" ";
+    dp[0][0]=v[0];
+    dp[1][0]=0;
+
+    for(i=1;i<n;i++)
+    {
+        dp[0][i]+=dp[1][i-1]+v[i];
+        dp[1][i]=max(dp[0][i-1],dp[1][i-1]);
+    }
 
 
-    return dp[amount];
+    // for(i=0;i<2;i++)
+    // {
+    //     for(j=0;j<n;j++)
+    //     cout<<dp[i][j]<<" ";
+    //     cout<<endl;
+    // }
 
+    return max(dp[0][n-1],dp[1][n-1]);
 }
 
 int main ()
@@ -64,8 +59,7 @@ int main ()
     cin.tie(NULL);  
     // test()
     {
-        ll i,j,amount,n;
-        cin>>amount;
+        ll i,j,n;
         cin>>n;
 
         vector<ll>v(n);
@@ -73,9 +67,19 @@ int main ()
         for(i=0;i<n;i++)
         cin>>v[i];
 
-        
-
-        cout<<solve(v,n,amount);        
+        cout<<solve(v,n);
     }
     return 0;
+}
+
+int sum(int n){
+    if(n<10){
+        return 0;
+    }
+    if(n%10==0){
+        return sum(n/10)+1;
+    }
+    else{
+        return sum(n/10);
+    }
 }

@@ -5,7 +5,7 @@ using namespace std;
 using namespace __gnu_pbds;
 #define ll            long long int
 #define endl          "\n"
-#define MOD           1000000007
+#define MOD           1e9 + 7
 #define test()        ll t; cin>>t; while(t--)
 #define ordered_set   tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>
 
@@ -18,18 +18,27 @@ bool compare(ll a,ll b)
     return a<b;
 }
 
-ll solve(ll n)
+ll solve(vector<ll>v,ll amount)
 {
-    ll dp[n+1];
-    dp[0]=0;
-    dp[1]=1;
-    dp[2]=2;
+    ll dp[amount+1]={0},i,j;
+    dp[0]=1;
 
-    for(ll i=3;i<=n;i++)
+    for(i=0;i<v.size();i++)
     {
-        dp[i]=dp[i-1]+(i-1)*dp[i-2];
+        for(j=1;j<=amount;j++)
+        {
+            if(j-v[i]>=0)
+            {
+                dp[j]+=dp[j-v[i]];
+            }
+        }
     }
-    return dp[n];
+
+    for(i=0;i<=amount;i++)
+    cout<<dp[i]<<" ";
+    cout<<endl;
+
+    return dp[amount];
 }
 
 int main ()
@@ -40,12 +49,20 @@ int main ()
 #endif
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);  
-    test()
+    // test()
     {
-        ll i,j,n;
+        ll i,j,n,amount;
+        cin>>amount;
+
+        // ll n;
         cin>>n;
 
-        cout<<solve(n);
+        vector<ll>v(n);
+
+        for(i=0;i<n;i++)
+        cin>>v[i];
+
+        cout<<solve(v,amount);
     }
     return 0;
 }

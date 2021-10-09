@@ -14,6 +14,7 @@ using namespace std;
 #define MOD 1000000007
 #define test(t) ll t; cin>>t; while(t--)
 
+
 ll coin_exchange(ll n,ll *dp)
 {
     dp[0]=0;

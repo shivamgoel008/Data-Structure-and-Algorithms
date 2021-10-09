@@ -5,7 +5,7 @@ using namespace std;
 using namespace __gnu_pbds;
 #define ll            long long int
 #define endl          "\n"
-#define MOD           1000000007
+#define MOD           1e9 + 7
 #define test()        ll t; cin>>t; while(t--)
 #define ordered_set   tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update>
 
@@ -18,20 +18,37 @@ bool compare(ll a,ll b)
     return a<b;
 }
 
-ll solve(ll n)
+ll solve(vector<ll>v)
 {
-    ll dp[n+1];
-    dp[0]=0;
-    dp[1]=1;
-    dp[2]=2;
-
-    for(ll i=3;i<=n;i++)
+    ll n=v.size();
+    ll buy,sell;
+    ll ans=0;
+    for(ll i=0;i<n;i++)
     {
-        dp[i]=dp[i-1]+(i-1)*dp[i-2];
-    }
-    return dp[n];
-}
+        if(i==0)
+        {
+            buy=v[0];
+            sell=v[0];
+        }
+        else 
+        {
+            if(v[i]>=v[i-1])
+            sell=v[i];
 
+            else if(v[i]<v[i-1])
+            {
+                // cout<<v[i]<<" "<<v[i-1]<<endl;
+                ans+=abs(buy-sell);
+                buy=v[i];
+                sell=v[i];
+            }
+        }
+    }
+
+    ans+=abs(sell-buy);
+
+    return ans;
+}
 int main ()
 {
 #ifndef ONLINE_JUDGE
@@ -45,7 +62,12 @@ int main ()
         ll i,j,n;
         cin>>n;
 
-        cout<<solve(n);
+        vector<ll>v(n);
+
+        for(i=0;i<n;i++)
+        cin>>v[i];
+
+        cout<<solve(v);
     }
     return 0;
 }

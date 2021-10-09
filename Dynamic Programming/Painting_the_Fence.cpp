@@ -18,18 +18,39 @@ bool compare(ll a,ll b)
     return a<b;
 }
 
-ll solve(ll n)
+ll solve(ll n,ll k)
 {
-    ll dp[n+1];
-    dp[0]=0;
-    dp[1]=1;
-    dp[2]=2;
+    ll dp[2][n+1];
+    ll i,j;
 
-    for(ll i=3;i<=n;i++)
+    for(i=0;i<2;i++)
     {
-        dp[i]=dp[i-1]+(i-1)*dp[i-2];
+        for(j=0;j<=n;j++)
+        dp[i][j]=0;
     }
-    return dp[n];
+
+    for(i=1;i<=n;i++)
+    {
+        if(i==1)
+        {
+            dp[0][i]=0;
+            dp[1][i]=k;
+        }
+        else 
+        {
+            dp[0][i]=dp[1][i-1]%MOD;
+            dp[1][i]=((dp[0][i-1]%MOD+dp[1][i-1]%MOD)%MOD*(k-1))%MOD;
+        }
+    }
+
+    for(i=0;i<2;i++)
+    {
+        for(j=0;j<=n;j++)
+        cout<<dp[i][j]<<" ";
+        cout<<endl;
+    }
+
+    return (dp[0][n]+dp[1][n])%MOD;
 }
 
 int main ()
@@ -40,12 +61,12 @@ int main ()
 #endif
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);  
-    test()
+    // test()
     {
-        ll i,j,n;
-        cin>>n;
+        ll i,j,n,k;
+        cin>>n>>k;
 
-        cout<<solve(n);
+        cout<<solve(n,k);
     }
     return 0;
 }

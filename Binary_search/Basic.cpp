@@ -25,25 +25,19 @@ int main ()
     cin.tie(NULL);
     // test()
     {
-        ll n;
+        ll n,i,j;
         cin>>n;
 
-        multiset<ll>ms;
+        vector<ll>v(n);
 
-        for(ll i=0;i<n;i++)
-        ms.insert((i+1)*10);
+        for(i=0;i<n;i++)
+        cin>>v[i];
 
-        for(auto i:ms)
-        cout<<i<<" ";
-        cout<<endl;
+        ll it=lower_bound(v.begin(),v.end(),4)-v.begin();
+        cout<<it<<endl;
 
-        cout<<*upper_bound(ms.begin(),ms.end(),10);
-        ms.erase(*upper_bound(ms.begin(),ms.end(),10));
-        cout<<endl;
+        cout<<v[it]<<endl;
 
-        for(auto i:ms)
-        cout<<i<<" ";
-        cout<<endl;
     }
     return 0;
 }
